@@ -1,0 +1,8 @@
+**/tags
+**/.tags
+**/cache
+**/autosave
+**/command-history
+**/search-history
+**/lib.pl
+local/bin/stop-ls
