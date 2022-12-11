@@ -7,10 +7,18 @@
 # Environment Variables
 export EDITOR=nvim
 export PATH=${PATH}:${HOME}/.local/bin
+export DOTS=${HOME}/dots-for-android
+
+
+
+source ${DOTS}/shell/prompt-colors
+
 
 PS1="${R}[${G}\u${P}@${B}android${W}: ${Y}\W${R}]${C}\$${F} "
 
 
 
 
-miti
+miti | cowsay
+
+echo " "
