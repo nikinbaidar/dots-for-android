@@ -8,9 +8,9 @@
 export EDITOR=nvim
 export PATH=${PATH}:${HOME}/.local/bin
 
-C="\[\e[01;36m\]"
-F="\[\e[00;37m\]"
+PS1="${R}[${G}\u${P}@${B}android${W}: ${Y}\W${R}]${C}\$${F} "
 
-PS1="${C}\W${F} >> "
+
+
 
 miti
