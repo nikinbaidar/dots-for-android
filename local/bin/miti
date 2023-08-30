@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env python
 
-const nepali_years_and_days_in_months = [
+nepali_years_and_days_in_months = [
     [2000, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
     [2001, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30],
     [2002, 31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30],
@@ -94,167 +94,79 @@ const nepali_years_and_days_in_months = [
     [2090, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30]
 ];
 
-function isLeapYear(year) {
-    if (year % 100 === 0) {
-        return (year % 400 === 0);
-    } else {
-        return (year % 4 === 0);
-    }
-}
+def is_leap_year(year):
+    if year % 100 == 0:
+        return year % 400 == 0
+    else:
+        return year % 4 == 0
 
-function getNepaliMonth(month) {
-    let englishMonth = "";
+def get_nepali_month(month):
+    months = [
+        "Baisakh", "Jestha", "Ashad", "Shrawan", "Bhadra", "Aasoj",
+        "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"
+    ]
+    return months[month - 1]
 
-    switch (month) {
-        case 1:
-            englishMonth = "Baisakh";
-            break;
+def convert_english_date_to_nepali(yy, mm, dd):
+    def_eyy = 1944
+    def_nyy = 2000
+    def_nmm = 9
+    def_ndd = 17 - 1
+    month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    leap_year_months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    total_eDays = 0
+    day = 7 - 1
 
-        case 2:
-            englishMonth = "Jestha";
-            break;
+    for i in range(yy - def_eyy):
+        if is_leap_year(def_eyy + i):
+            for j in range(12):
+                total_eDays += leap_year_months[j]
+        else:
+            for j in range(12):
+                total_eDays += month[j]
 
-        case 3:
-            englishMonth = "Ashad";
-            break;
+    for i in range(mm - 1):
+        if is_leap_year(yy):
+            total_eDays += leap_year_months[i]
+        else:
+            total_eDays += month[i]
 
-        case 4:
-            englishMonth = "Shrawan";
-            break;
+    total_eDays += dd
 
-        case 5:
-            englishMonth = "Bhadra";
-            break;
+    i = 0
+    j = def_nmm
+    total_nDays = def_ndd
+    m = def_nmm
+    y = def_nyy
+    a = 0
 
-        case 6:
-            englishMonth = "Aasoj";
-            break;
+    while total_eDays != 0:
+        a = nepali_years_and_days_in_months[i][j]
+        total_nDays += 1
+        day += 1
+        if total_nDays > a:
+            m += 1
+            total_nDays = 1
+            j += 1
+        if day > 7:
+            day = 1
+        if m > 12:
+            y += 1
+            m = 1
+        if j > 12:
+            j = 1
+            i += 1
+        total_eDays -= 1
 
-        case 7:
-            englishMonth = "Kartik";
-            break;
+    date_string = f"{y} {get_nepali_month(m)} {total_nDays}"
+    return date_string
 
-        case 8:
-            englishMonth = "Mangsir";
-            break;
+from datetime import datetime
 
-        case 9:
-            englishMonth = "Poush";
-            break;
+current_date_time = datetime.now()
+yy = current_date_time.year
+mm = current_date_time.month
+dd = current_date_time.day
 
-        case 10:
-            englishMonth = "Magh";
-            break;
-
-        case 11:
-            englishMonth = "Falgun";
-            break;
-
-        case 12:
-            englishMonth = "Chaitra";
-            break;
-    }
-    return englishMonth;
-}
-
-function convertEnglishDateToNepali(yy, mm, dd) {
-
-    if (!checkIfDateIsInRange(yy, mm, dd)) {
-        return "Invalid date !";
-    }
-
-    const month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const leap_year_months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-    const def_eyy = 1944;
-    const def_nyy = 2000;
-    const def_nmm = 9;
-    const def_ndd = 17 - 1;
-    let total_eDays = 0;
-
-    let day = 7 - 1;
-    let i, j;
-
-    for (i = 0; i < (yy - def_eyy); i++) {
-        if (isLeapYear(def_eyy + i)) {
-            for (j = 0; j < 12; j++) {
-                total_eDays = total_eDays + leap_year_months[j];
-            }
-        } else {
-            for (j = 0; j < 12; j++) {
-                total_eDays = total_eDays + month[j];
-            }
-        }
-    }
-
-
-    for (i = 0; i < (mm - 1); i++) {
-        if (isLeapYear(yy))
-            total_eDays += leap_year_months[i];
-        else
-            total_eDays += month[i];
-    }
-
-    total_eDays += dd;
-
-    i = 0;
-    j = def_nmm;
-    let total_nDays = def_ndd;
-    let m = def_nmm;
-    let y = def_nyy;
-    let a = 0;
-
-    while (total_eDays !== 0) {
-        a = nepali_years_and_days_in_months[i][j];
-        total_nDays++;
-        day++;
-        if (total_nDays > a) {
-            m++;
-            total_nDays = 1;
-            j++;
-        }
-        if (day > 7)
-            day = 1;
-        if (m > 12) {
-            y++;
-            m = 1;
-        }
-        if (j > 12) {
-            j = 1;
-            i++;
-        }
-        total_eDays--;
-    }
-
-    dateString = (getNepaliMonth(m) + " " + total_nDays + " " + y) ;
-    return dateString;
-}
-
-
-function addZero(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
-
-
-function checkIfDateIsInRange(year, month, day) {
-    if (year < 1944 || year > 2033) {
-        return false;
-    }
-    if (month < 1 || month > 12) {
-        return false;
-    }
-
-    return !(day < 1 || day > 31);
-
-}
-
-currentDateTime = new Date();
-
-yy = currentDateTime.getFullYear();
-mm = currentDateTime.getMonth() + 1;
-dd = currentDateTime.getDate();
-
-console.log(convertEnglishDateToNepali(yy, mm, dd));
+print(convert_english_date_to_nepali(yy, mm, dd))
