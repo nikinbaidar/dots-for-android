@@ -168,5 +168,7 @@ current_date_time = datetime.now()
 yy = current_date_time.year
 mm = current_date_time.month
 dd = current_date_time.day
+# weekday
+wd = current_date_time.strftime("%a")
 
-print(convert_english_date_to_nepali(yy, mm, dd))
+print(wd, convert_english_date_to_nepali(yy, mm, dd))

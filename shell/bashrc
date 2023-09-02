@@ -14,11 +14,8 @@ export DOTS=${HOME}/dots-for-android
 source ${DOTS}/shell/prompt-colors
 
 
-PS1="${R}[${G}\u${P}@${B}android${W}: ${Y}\W${R}]${C}\$${F} "
+PS1="${R}[${G}nikin${P}@${B}netricsa${W}: ${Y}\W${R}]${C}\$${F} "
 
+# miti
 
-
-
-miti | cowsay
-
-echo " "
+alias vi="nvim"

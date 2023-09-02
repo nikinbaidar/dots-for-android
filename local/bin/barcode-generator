@@ -1,0 +1,41 @@
+#!/bin/bash
+
+function encoder() {
+    text="$1"
+    name="$2"
+    bwip-js code128 "${text}" includetext backgroundcolor=ffffff padding=15 "${name}"
+}
+
+function technoMedica () {
+
+    fname="/data/data/com.termux/files/home/storage/pictures/barcodes/try.png"
+
+    exp=2403 # yymm
+    lot=96354125477850763250
+    a=6300 # Lower limit
+    b=6305 # Upper limit
+
+    for (( i=$a; i<$b; i++ )) {
+        new_text="71931${exp}${i}${lot}"
+        echo "Generating new barcode..."
+        encoder $new_text $fname
+        termux-open $fname
+        echo -n "Did the barcode work [N/y]? " ; read ans
+        echo ""
+        if [[ $ans = "y" ]] ; then
+            break
+        fi
+    }
+
+}
+
+
+technoMedica
+
+
+
+
+
+
+
+
