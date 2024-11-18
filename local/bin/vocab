@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cd ~/notes
+
+msg="$(git status | tail -1)"
+if [ "${msg}" = "nothing to commit, working tree clean" ]
+then
+    :
+else
+    git pull
+fi
+
+
+termux-open "/data/data/com.termux/files/home/notes/Archives/WPME.pdf"

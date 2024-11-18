@@ -6,14 +6,38 @@ function encoder() {
     bwip-js code128 "${text}" includetext backgroundcolor=ffffff padding=15 "${name}"
 }
 
-function technoMedica () {
+function sample_port () {
 
     fname="/data/data/com.termux/files/home/storage/pictures/barcodes/try.png"
 
-    exp=2403 # yymm
-    lot=96354125477850763250
-    a=6300 # Lower limit
-    b=6305 # Upper limit
+    a=65
+    b=74
+    lot=7160160178
+
+    for (( i=$a; i<$b; i++ )) {
+        new_text="${lot}${i}"
+        echo "Generating new barcode..."
+        echo $new_text
+        sleep 10
+        encoder $new_text $fname
+        termux-open $fname
+        echo -n "Did the barcode work [N/y]? " ; read ans
+        echo ""
+        if [[ $ans = "y" ]] ; then
+            break
+        fi
+    }
+
+}
+
+function cal_cartridge () {
+
+    fname="/data/data/com.termux/files/home/storage/pictures/barcodes/try.png"
+
+    exp=2409 # yymm
+    a=64016 # Lower limit
+    b=64020 # Upper limit
+    lot=92371125429857774250
 
     for (( i=$a; i<$b; i++ )) {
         new_text="71931${exp}${i}${lot}"
@@ -30,8 +54,8 @@ function technoMedica () {
 }
 
 
-technoMedica
-
+#cal_cartridge
+sample_port
 
 
 
