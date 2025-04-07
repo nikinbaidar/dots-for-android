@@ -17,6 +17,7 @@ source ${DOTS}/shell/prompt-colors
 PS1="${R}[${G}nikin${P}@${B}netricsa${W}: ${Y}\W${R}]${C}\$${F} "
 
 alias vi="nvim"
-alias ex="nvim ~/2080"
 
-miti
+source /data/data/com.termux/files/usr/share/fzf/key-bindings.bash
+source /data/data/com.termux/files/usr/share/fzf/completion.bash
+
