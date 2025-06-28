@@ -1,0 +1,5 @@
+#!/bin/bash
+echo Sending: $(basename "`cat recentfile.txt`")
+echo
+# termux-open --send "`cat ~/recentfile.txt`"
+termux-share -a send "$(cat ~/recentfile.txt)"

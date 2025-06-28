@@ -1,0 +1,6 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+ping -c 1 8.8.8.8 &>/dev/null && echo -n "You're online. The Matrix sees you. ✅" || echo -n "Disconnected. But weren’t we always? ❌"
+
+echo; echo
+read nth
