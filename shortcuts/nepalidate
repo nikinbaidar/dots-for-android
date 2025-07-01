@@ -1,5 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-
-node ~/.local/bin/miti
-echo; echo
-read nth

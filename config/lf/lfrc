@@ -1,0 +1,83 @@
+##################
+# Basic Settings #
+##################
+
+set number
+set mouse
+set relativenumber
+set ignorecase true
+set icons false
+set drawbox true
+set preview false
+set ratios 1:3:4  
+
+
+####################
+# Custom Functions #
+####################
+
+cmd open ${{
+    file_type=$(file --mime-type "${fx}" -b)
+
+    case "$file_type" in
+        text/*) $EDITOR "$fx";;
+        text/tex) $EDITOR "$fx"; return 0;;
+        text/markdown) $EDITOR "$fx" ;;
+        text/plaintex) $EDITOR "$fx" ;;
+        *) for file in "${fx[@]}"; do setsid $OPENER "$file" > /dev/null 2> /dev/null & done;;
+    esac
+    echo "";
+}}
+
+map <enter> open
+
+
+cmd mkdir ${{
+    mkdir "${@}"
+}}
+
+
+cmd touch ${{
+    touch "${@}"
+}}
+
+
+cmd q quit
+
+
+cmd setwallpaper ${{
+    cb "$f" 
+}} 
+
+
+##############################
+# Key Mapping and Unmappings #
+##############################
+
+map <space> :echo Key map not found. Let's calm down, escape, and try again.
+
+map <c-c> cmd-interrupt
+map <esc> cmd-escape
+map <c-z> $ kill -STOP $PPID
+map s :toggle; down
+map S :toggle; up
+map u :clear; unselect
+map i invert
+map D delete
+map t $$SHELL
+map gs setwallpaper
+
+# Quick navigations to Frequent Paths
+map gh cd ~
+
+map gc :{{
+    set hidden
+    cd ~/.config
+}}
+
+map gn cd ~/notes
+map gf cd ~/notes/Fuse-AI-Fellowhsip-2024
+map gd cd ~/Docs
+map gD cd ~/Downloads
+map gb cd ~/Documents/books
+map gv cd ~/Videos/screencasts/

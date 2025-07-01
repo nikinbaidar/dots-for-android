@@ -1,9 +1,0 @@
-#!/bin/bash
-
-file=$(fd -L -t f --base-directory "$HOME/storage" --exclude dcim --exclude shared/DCIM -0 | fzf --read0)
-file=$(realpath "$HOME/storage/$file")
-echo
-echo "⏳ If this takes too long, blame the electrons."
-termux-open "$file"
-
-echo "$file" >  ~/recentfile.txt

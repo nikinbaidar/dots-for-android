@@ -1,0 +1,4 @@
+#!/bin/bash
+echo -ne "\e[?25l"
+echo Selected file: $(basename "`cat ~/.recentfile.txt`")
+termux-open --send "`cat ~/.recentfile.txt`"

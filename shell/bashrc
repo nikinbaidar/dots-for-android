@@ -15,8 +15,28 @@ source ${DOTS}/shell/prompt-colors
 
 
 PS1="${R}[${G}nikin${P}@${B}netricsa${W}: ${Y}\W${R}]${C}\$${F} "
+PS1="\W > "
 
 alias vi="nvim"
+
+export FZF_DEFAULT_OPTS="
+  --height=70%
+  --reverse
+  --border
+  --layout=reverse
+  --prompt='➤ '
+  --marker='✓'
+  --color=bg+:24
+  --preview='
+    FILE={};
+    if file --mime \"\$FILE\" | grep -q binary; then
+      echo -e \"\n\033[1;31m(binary file)\033[0m\"
+    else
+      (bat --style=numbers --color=always \"\$FILE\" 2>/dev/null || cat \"\$FILE\" 2>/dev/null)
+    fi;
+    echo -e \"\n\033[1;32m\$(basename \"\$FILE\")\033[0m\"'
+  --preview-window=top:50%:wrap
+"
 
 source /data/data/com.termux/files/usr/share/fzf/key-bindings.bash
 source /data/data/com.termux/files/usr/share/fzf/completion.bash

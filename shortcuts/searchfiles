@@ -1,0 +1,51 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+
+
+
+export FZF_DEFAULT_OPTS="
+  --height=100%
+  --reverse
+  --border
+  --layout=reverse
+  --prompt='➤ '
+  --marker='✓'
+  --color=bg+:24
+  --preview='
+    FILE={};
+    if file --mime \"\$FILE\" | grep -q binary; then
+      echo -e \"\n\033[1;31m(binary file)\033[0m\"
+    else
+      (bat --style=numbers --color=always \"\$FILE\" 2>/dev/null || cat \"\$FILE\" 2>/dev/null)
+    fi;
+    echo -e \"\n\033[1;32m\$(basename \"\$FILE\")\033[0m\"'
+  --preview-window=top:50%:wrap
+"
+
+
+# Search in both notes and storage directories
+file=$(fd -L -t f . "$HOME/notes" "$HOME/storage" \
+    --exclude dcim --exclude shared/DCIM -0 | fzf --read0)
+
+echo -ne "\e[?25l"
+# Exit if nothing selected
+[ -z "$file" ] && exit 1
+
+file=$(realpath "$file")
+
+printf "\n%.0s" {1..25}
+
+echo -e "      ⏳ If this takes too long, blame the electrons."
+
+# Use 'file' to get MIME type
+mime=$(file --mime-type -b "$file")
+
+# Check if it's a text file
+if [[ "$mime" == text/* ]]; then
+    vi "$file"
+else
+    termux-open "$file"
+fi
+
+# Save recent file path
+echo "$file" > ~/recentfile.txt
