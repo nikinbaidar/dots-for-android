@@ -21,7 +21,7 @@ export FZF_DEFAULT_OPTS="
 
 
 # Search in both notes and storage directories
-file=$(fd -L -t f . "$HOME/notes" "$HOME/storage" \
+file=$(fd -L -t f . "$HOME/notes" "/data/data/com.termux/files/home/storage/shared/equipment_manuals" \
     --exclude dcim --exclude shared/DCIM -0 | fzf --read0)
 
 echo -ne "\e[?25l"

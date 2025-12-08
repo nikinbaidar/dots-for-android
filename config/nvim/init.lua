@@ -63,7 +63,7 @@ require("lazy").setup({
 
 
 
-vim.cmd [[ colorscheme habamax ]]
+vim.cmd [[ colorscheme tokyonight-night ]]
 
 
 vim.g.netrw_banner = 0

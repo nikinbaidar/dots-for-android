@@ -12,6 +12,7 @@ export DOTS=${HOME}/dots-for-android
 
 
 source ${DOTS}/shell/prompt-colors
+source ${DOTS}/shell/bash_aliases
 
 
 PS1="${R}[${G}nikin${P}@${B}netricsa${W}: ${Y}\W${R}]${C}\$${F} "

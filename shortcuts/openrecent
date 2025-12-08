@@ -1,0 +1,38 @@
+#!/bin/bash
+
+cowcenter() {
+  local msg="$*"
+  local width=$(tput cols)
+  local output
+  output=$(cowsay "$msg")
+  local max_len=$(echo "$output" | awk '{print length}' | sort -nr | head -n1)
+  local padding=$(( (width - max_len) / 2 ))
+  echo "$output" | sed "s/^/$(printf '%*s' "$padding")/"
+}
+
+
+
+echo -ne "\e[?25l"
+
+
+printf "\n%.0s" {1..20}
+
+echo  $(basename "`cat ~/.recentfile.txt`") | cowcenter
+
+file="`cat ~/.recentfile.txt`"
+
+
+# Use 'file' to get MIME type
+mime=$(file --mime-type -b "$file")
+
+# Check and act accordingly
+if [[ "$mime" == text/* && "$file" != *.html ]]; then
+  vi "$file"
+else
+  termux-open "$file"
+fi
+
+
+
+# Save recent file path
+echo "${file}" > ~/.recentfile.txt

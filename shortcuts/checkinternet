@@ -1,0 +1,6 @@
+#!/data/data/com.termux/files/usr/bin/bash
+echo -ne "\e[?25l"
+printf "\n%.0s" {1..23}
+
+ping -c 1 8.8.8.8 &>/dev/null && echo -e "\t  You're online. The Matrix sees you. ✅" || echo -en "\tDisconnected. But weren’t we always? ❌"
+read -n 1 -s
