@@ -15,7 +15,9 @@ def get_total_amount(taxable_amount, vat=0.13):
 def read_float(prompt):
     while True:
         try:
-            return float(input(prompt))
+            expression = input(prompt)
+            value = eval(expression)
+            return float(value)
         except ValueError:
             print("Enter a valid number.")
 
