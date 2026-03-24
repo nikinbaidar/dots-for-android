@@ -27,13 +27,15 @@ description = input("Describe the problem:\n\n")
 breakdown_order = f"""
 {info['Instrument Type']}
 {info['Model']}
-SN: {sn}
-Nepal
+Serial Number: {sn}
+
 {description}
-{customer}
+
+Machine Located Country: Nepal
+Hospital name: {customer}
 Distributor ID: S200560
-Contact Person: Nikin Baidar (Service engineer @ GMS)
-Contact: 9700047278/nikinbaidar.lsm@gmail.com
+Contact Person: Nikin (Service engineer @ GMS)
+Contact: 9700047278
 """
 
 subprocess.run(["termux-share", "-a", "send"], text=True, input=breakdown_order)
