@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+import pandas as pd
+import subprocess
+
+machines = pd.read_csv('/data/data/com.termux/files/home/storage/shared/equipment_manuals/_logs/machines.csv')
+sn = input("Enter machine SN: ").strip().upper()
+product_code = sn[:3]
+
+try:
+    info = machines.set_index("Product Code").loc[product_code].to_dict()
+except KeyError as k:
+    print(f"Product Code {k} not found\n")
+    model = input("Enter model: ").strip()
+    instrument_type = input("Enter instrument type: ").strip()
+    with open('/data/data/com.termux/files/home/storage/shared/equipment_manuals/_logs/machines.csv', 'a') as f:
+        f.write(f"\n{product_code},{model},{instrument_type}")
+    info = {
+            'Model': model,
+            'Instrument Type': instrument_type
+            }
+
+customer = input("Enter customer name: ").strip()
+customer = customer.title() if " " in customer else customer.upper()
+description = input("Describe the problem:\n\n")
+
+breakdown_order = f"""
+{info['Instrument Type']}
+{info['Model']}
+SN: {sn}
+Nepal
+{description}
+{customer}
+Distributor ID: S200560
+Contact Person: Nikin Baidar (Service engineer @ GMS)
+Contact: 9700047278/nikinbaidar.lsm@gmail.com
+"""
+
+subprocess.run(["termux-share", "-a", "send"], text=True, input=breakdown_order)
