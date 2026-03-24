@@ -54,10 +54,10 @@ function cal_cartridge () {
 }
 
 
-#cal_cartridge
-sample_port
-flowcell
-pumpset
+cal_cartridge
+#sample_port
+# flowcell
+# pumpset
 
 
 

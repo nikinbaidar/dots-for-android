@@ -15,8 +15,8 @@ source ${DOTS}/shell/prompt-colors
 source ${DOTS}/shell/bash_aliases
 
 
-PS1="${R}[${G}nikin${P}@${B}netricsa${W}: ${Y}\W${R}]${C}\$${F} "
-PS1="\W > "
+# PS1="${R}[${G}nikin${P}@${B}intellisense${W}: ${Y}\W${R}]${C}\$${F} "
+PS1="\W $ "
 
 alias vi="nvim"
 
@@ -41,4 +41,3 @@ export FZF_DEFAULT_OPTS="
 
 source /data/data/com.termux/files/usr/share/fzf/key-bindings.bash
 source /data/data/com.termux/files/usr/share/fzf/completion.bash
-
