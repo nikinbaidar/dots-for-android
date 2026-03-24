@@ -20,14 +20,20 @@ except KeyError as k:
             'Instrument Type': instrument_type
             }
 
+expected_serial_num_length = 11 if product_code[-1] == "-" else 12
+
+if len(sn) != expected_serial_num_length:
+    print(f"\n'{sn}' length is {len(sn)}. " \
+          f"It may be invalid for {info['Model']} {info['Instrument Type']}.\n")
+
 customer = input("Enter customer name: ").strip()
 customer = customer.title() if " " in customer else customer.upper()
 description = input("Describe the problem:\n\n")
-
 breakdown_order = f"""
-{info['Instrument Type']}
-{info['Model']}
+Product: {info['Instrument Type']}
+Model: {info['Model']}
 Serial Number: {sn}
+Requests needing our support:
 
 {description}
 
