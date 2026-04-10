@@ -34,9 +34,7 @@ Product: {info['Instrument Type']}
 Model: {info['Model']}
 Serial Number: {sn}
 Requests needing our support:
-
 {description}
-
 Machine Located Country: Nepal
 Hospital name: {customer}
 Distributor ID: S200560
