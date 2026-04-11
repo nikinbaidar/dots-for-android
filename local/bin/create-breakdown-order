@@ -28,7 +28,7 @@ if len(sn) != expected_serial_num_length:
 
 
 print("Select a customer:")
-customer_file_path = "/home/nikin/manuals/_logs/customers.txt"
+customer_file_path = "/data/data/com.termux/files/home/storage/shared/equipment_manuals/_logs/customers.txt"
 with open(customer_file_path, "r") as f:
     lines = f.read()
 customer = subprocess.run( ["fzf"], input=lines, text=True, capture_output=True)
@@ -49,7 +49,7 @@ else:
 description = input("Requests needing our support:\n")
 
 def getSpareParts(count):
-    spare_parts=pd.read_csv("/home/nikin/manuals/_logs/spareparts_partnumber.csv")
+    spare_parts=pd.read_csv("/data/data/com.termux/files/home/storage/shared/equipment_manuals/_logs/spareparts_partnumber.csv")
     isSparePartListAvailable = info['Model'] in spare_parts.iloc[:, 2].unique().tolist()
 
     if isSparePartListAvailable:
