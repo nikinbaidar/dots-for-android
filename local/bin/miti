@@ -227,7 +227,8 @@ function convertEnglishDateToNepali(yy, mm, dd) {
   }
 
     r=a-total_nDays
-  dateString = ("📅 " + y + "-" + addZero(m) + "-" + total_nDays + " B.S.\n(" + r + " " + ((r>1)?"days":"day") + " till end of " + getNepaliMonth(m) + ")") ;
+  // dateString = ("📅 " + y + "-" + addZero(m) + "-" + total_nDays + " B.S.\n(" + r + " " + ((r>1)?"days":"day") + " till end of " + getNepaliMonth(m) + ")") ;
+  dateString = (y + "-" + addZero(m) + "-" + total_nDays) ;
   return dateString;
 }
 

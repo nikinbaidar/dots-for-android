@@ -4,9 +4,28 @@ data="$HOME/data.json"
 key1=$(jq -r 'keys[]' "$data" | fzf) || exit 0
 key2=$(jq -r --arg k1 "$key1" '.[$k1] | keys[]' "$data" | fzf) || exit 0
 
-jq -r --arg k1 "$key1" --arg k2 "$key2" '.[$k1][$k2]' "$data" | termux-share -a send
 
 if [[ $key1 == PAN* ]];
 then
-    :
+    echo
+    echo Date : `node /data/data/com.termux/files/home/dots-for-android/local/bin/miti`
+    echo "-----------------"
+    echo
+
+    printf "%-8s : %s\n" "Name" "$key2"
+    printf "%-8s : %s\n" "PAN" "$(jq -r --arg k1 "$key1" --arg k2 "$key2" '.[$k1][$k2][0]' "$data")"
+    printf "%-8s : %s\n" "Address" "$(jq -r --arg k1 "$key1" --arg k2 "$key2" '.[$k1][$k2][1]' "$data")"
+
+    echo
+
+    echo -n "Do you want to share PAN number? [N/y] "
+    read ans
+
+    if [[ $ans = 'y' ]]
+    then
+        jq -r --arg k1 "$key1" --arg k2 "$key2" '.[$k1][$k2][0]' "$data" | termux-share -a send
+    fi
+    exit 0
 fi
+
+jq -r --arg k1 "$key1" --arg k2 "$key2" '.[$k1][$k2]' "$data" | termux-share -a send
