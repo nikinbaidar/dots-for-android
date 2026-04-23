@@ -33,7 +33,8 @@ file=$(realpath "$file")
 
 printf "\n%.0s" {1..25}
 
-echo -e "      ⏳ If this takes too long, blame the electrons."
+# termux-toast -g buttom "Wait a sec"
+
 
 # Use 'file' to get MIME type
 mime=$(file --mime-type -b "$file")
